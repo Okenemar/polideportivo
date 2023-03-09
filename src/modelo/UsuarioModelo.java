@@ -12,13 +12,13 @@ public class UsuarioModelo extends Conector {
 
 	public void insertarUsuario(Usuario usuario) {
 		try {
-			PreparedStatement prt = conexion.prepareStatement("INSERT INTO usuarios(nombre_apellido, dni,codigo) VALUES (?,?,?)");
+			preparedSt = conexion.prepareStatement("INSERT INTO usuarios(nombre_apellido, dni,codigo) VALUES (?,?,?)");
 
-			prt.setString(1, usuario.getNombreApellido());
-			prt.setString(2, usuario.getDni());
-			prt.setString(3, usuario.getCodigo());
+			preparedSt.setString(1, usuario.getNombreApellido());
+			preparedSt.setString(2, usuario.getDni());
+			preparedSt.setString(3, usuario.getCodigo());
 
-			prt.execute();
+			preparedSt.execute();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
