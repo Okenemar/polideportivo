@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class UsuarioModelo extends Conector {
 	PreparedStatement preparedSt;
 
@@ -65,14 +64,14 @@ public class UsuarioModelo extends Conector {
 		return usuario;
 }
 	public ArrayList<Usuario> mostrarUsuarios(){
-		
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		Usuario usuario = new Usuario();
 		try {
 		Statement st = conexion.createStatement();
 		
 		String sentenciaSelect = "SELECT * FROM usuarios";
 		ResultSet resultado = st.executeQuery(sentenciaSelect);
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
 		while (resultado.next()) {
 			
 			usuario.setId(resultado.getInt("id"));
@@ -90,4 +89,20 @@ public class UsuarioModelo extends Conector {
 		return usuarios;
 
 	}
+	/*modificaaa*/
+public void modificarUsuario(Usuario usuario, int id)  {
+		
+		try {
+			
+		preparedSt = conexion.prepareStatement("UPDATE usuarios SET nombre_apellido=?, dni=?, codigo=? WHERE id=?");
+		
+		preparedSt.setString(1, usuario.getNombreApellido());
+		preparedSt.setString(2, usuario.getDni());
+		preparedSt.setString(3, usuario.getCodigo());
+		
+		preparedSt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 }
